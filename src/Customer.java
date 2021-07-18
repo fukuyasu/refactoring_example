@@ -25,12 +25,7 @@ public class Customer {
 		String result = "Rental Record for " + getName() + "\n";
 		while (rentals.hasMoreElements()) {
 			Rental each = (Rental) rentals.nextElement();
-
-			// レンタルポイントを加算
-			frequentRenterPoints++;
-			// 新作を二日以上借りた場合はボーナスポイント
-			if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-					each.getDaysRented() > 1) frequentRenterPoints++;
+			frequentRenterPoints += each.getFrequentRenterPoints();
 
 			// この貸出に関する数値の表示
 			result += "\t" + each.getMovie().getTitle() + "\t" +
