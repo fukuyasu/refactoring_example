@@ -96,7 +96,7 @@ class CustomerTest {
 	}
 
 	@Test
-	void testStatement_4movies() {
+	void testStatement_5movies() {
 		Customer customer = new Customer("Bob");
 		customer.addRental(new Rental(m_titanic, 4));
 		customer.addRental(new Rental(m_frozen, 3));
