@@ -12,7 +12,7 @@ class CustomerTest {
 	static final Movie m_lionking = new Movie("The Lion King",  Movie.CHILDRENS);
 	static final Movie m_frozen   = new Movie("Frozen",         Movie.CHILDRENS);
 	static final Movie m_harry    = new Movie("Harry Potter",   Movie.CHILDRENS);
-	
+
 	@Test
 	void testStatement_1regular_1day() {
 		Customer customer = new Customer("Alice");
@@ -112,6 +112,26 @@ class CustomerTest {
 				+ "\tHarry Potter\t1.5\n"
 				+ "Amount owed is 25.0\n"
 				+ "You earned 6 frequent renter points";
+		assertEquals(expected, result);
+	}
+
+	@Test
+	void testHtmlStatement_5movies() {
+		Customer customer = new Customer("Bob");
+		customer.addRental(new Rental(m_titanic, 4));
+		customer.addRental(new Rental(m_frozen, 3));
+		customer.addRental(new Rental(m_starwars, 2));
+		customer.addRental(new Rental(m_jurassic, 5));
+		customer.addRental(new Rental(m_harry, 1));
+		String result = customer.htmlStatement();
+		String expected = "<H1>Rentals for <EM>Bob</EM></H1><P>\n"
+				+ "Titanic: 5.0<BR>\n"
+				+ "Frozen: 1.5<BR>\n"
+				+ "Star Wars: 2.0<BR>\n"
+				+ "Jurassic World: 15.0<BR>\n"
+				+ "Harry Potter: 1.5<BR>\n"
+				+ "<P>You owe <EM>25.0</EM><P>\n"
+				+ "On this rental you earned <EM>6</EM> frequent renter points<P>";
 		assertEquals(expected, result);
 	}
 
